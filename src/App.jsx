@@ -14,7 +14,6 @@ function App() {
   
 
   const handleClick = () => {
-    if (!title || !description) return alert("Title and description are required!");
       dispatch(addTask(title,description))
       setTitle('')
       setDescription('')
@@ -25,7 +24,7 @@ function App() {
    <input className="border" value={title} onChange={(e)=>setTitle(e.target.value)} type="text" />
    <input className="border" value={description} onChange={(e)=>setDescription(e.target.value)} type="text" />
    <button className="bg-blue-600 text-white" onClick={handleClick} >addTask</button>
-
+   {error && <p className="text-red-500">{error}</p>}
    {
    loading? "loading..." : value?.map( elem => {
     return <Card deleteItem={elem} done={elem.done} text={elem} id={elem.id} />

@@ -30,11 +30,12 @@ const TodoReducers = ( state = initialState, action ) => {
 export const addTask = (title,description) => async(dispatch) => {
         dispatch({type:'ADD_TASK_REQUEST'});
        await new Promise(res =>setTimeout(res,1000)) //this promise is just to simulate api call
-    try{if(!(title,description)){
-        dispatch({ type:'ADD_TASK_ERROR', payload: 'something went wrong'})
+    try{
+        if(!title||!description){
+       return dispatch({ type:'ADD_TASK_ERROR', payload: 'fill all blank'})
     }
         dispatch({ type:'ADD_TASK_SUCCESS', payload:{ title, description }})
-    } catch (error) {
+    }  catch (error) {
         dispatch({ type:'ADD_TASK_ERROR', payload: 'something went wrong'})
     }
 }
